@@ -5,7 +5,11 @@ import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Noli App';
+  constructor(
+    @InjectModel(Data.name)
+    private dataModel: Model<Data>,
+  ) {}
+  async getHello() {
+    return await this.dataModel.find();
   }
 }
